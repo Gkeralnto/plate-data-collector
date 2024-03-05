@@ -9,7 +9,7 @@ from flask import Flask, request, jsonify, render_template
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*":{"origins":"*"}}, supports_credentials=True, allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Headers"])
+#CORS(app, resources={r"/*":{"origins":"*"}}, supports_credentials=True, allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Headers"])
 
 @app.route("/")
 def index():
