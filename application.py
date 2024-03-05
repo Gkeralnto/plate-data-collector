@@ -15,6 +15,14 @@ app = Flask(__name__)
 def index():
     return send_file("html/MainPage.html")
 
+@app.route("/html/<path:filename>")
+def serve_html(filename):
+    return send_file("html/" + filename)
+
+@app.route("/html/static/<path:filename>")
+def serve_static(filename):
+    return send_file("html/static/" + filename)
+
 # @app.route('/process-image', methods=['POST'])
 # def processImage():
 #     try:
