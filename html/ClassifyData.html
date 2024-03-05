@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classify Data</title>
+    <link rel="stylesheet" href="./static/styleClassifyPage.css">
+    <script src="./static/retrieveImgFromDatabase.js"></script>
+</head>
+
+<body>
+    <header id="title_container">
+        <div>
+            <h>License Plate Recognition: Συλλέκτης Δεδομένων</h>
+        </div>
+        <div id="navigation">
+            <nav>
+                <span><a class="navbtn" role="button" href="MainPage.html"><span>Αρχική</span></a></span>
+                <span><a class="navbtn" role="button" href="UploadData.html"><span>Μεταφόρτωση</span></a></span>
+                <span><a class="navbtn" role="button" href="ClassifyData.html"><span>Ταξινόμηση</span></a></span>
+            </nav>
+        </div>
+    </header>
+    <main class="wrapper">
+        <div>
+            <p style="font-family: Garamond; font-size: 27px;">Όδηγιες:</p>
+            <p style="font-family: Garamond;">Το ζητούμενο σε αυτή τη σελίδα είναι η ταξινόμηση των δεδομένων. Στο
+                αριστερό μέρος της
+                οθόνης θα εμφανίζονται εικόνες από την βάση δεδομένων, οι οποίες δεν έχουν ταξινομηθεί.
+                Στο δεξιό μέρος της οθόνης υπάρχει το χωρίο όπου ο χρήστης θα πρέπει να εισάγει τον
+                αντίστοιχο χαρακτήρα, ανάλογα με την εικόνα που βλέπει. Για να μπορέσει να σταλθεί ο χαρακτήρας,
+                θα πρέπει να είναι ένας εκ των έγκυρων χαρακτήρων. Αυτοί είναι οι: A, B, E, Z, H, I, K, M, N, O, P, T,
+                Y, X, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 και η παύλα '-'. Θα πρέπει το
+                πληκτρολόγιο να εισάγει λατινικούς χαρακτήρες. Σε περίπτωση που η εικόνα δεν αντιστοιχεί σε κάποιο
+                γράμμα ή αριθμό, ή εάν κρίνετε πως ο εικονιζόμενος χαρακτήρας
+                δεν είναι σαφής, παρακαλείστε να εισάγετε την παύλα '-'. Μετά την εισαγωγή του χαρακτήρα, πατήστε το
+                κουμπί "Επόμενο". Η εικόνα στα αριστερά θα ανανεωθεί. Κάνετε την διαδικασία όσες φορές επιθυμείτε.</p>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+            <div class="classificationContainer">
+                <span class="classificationContainerSpan">
+                    <span class="ImageDisplay">
+                        <span id="ImagePreview">
+                            <div>
+                                <h>Χαρακτήρας προς αναγνώριση</h>
+                            </div>
+                            <div style="height:100%; width:100%; display: flex; justify-content: center;">
+                                <img src="" id="rndm" style="max-height:300px; min-width:50%; align-self: center;">
+                            </div>
+                        </span>
+                    </span>
+                    <span class="ImageClassify">
+                        <span class="ImageClassifyHolder">
+                            <span style="font-family: Garamond; font-size: 24px;">
+                                <h>Πληκτρολόγησε τον χαρακτήρα που βλέπεις στην εικόνα</h>
+                            </span>
+                            <span id="userinput">
+                                <input type="text" name="UserClassification" placeholder="Εικονιζόμενος χαρακτήρας"
+                                    id="userinputinner" maxlength="1">
+                            </span>
+                            <div>
+                                <h style="text-align: center; font-family: Garamond; font-size: smaller; color:red; display: none;"
+                                    id="errorMessage">Προσοχή! Πληκτρολογήσε μόνο επιτρεπτούς χαρακτήρες</h>
+                            </div>
+                            <span><button class="btn1" disabled id="nextbtn"><span>Next</span></button></span>
+                            <script>
+                                //Get the input element and error message element
+                                var input = document.getElementById("userinputinner");
+                                var errorMessage = document.getElementById("errorMessage");
+                                var nextButton = document.getElementById("nextbtn");
+                                //Add event listener for the input event                                     
+                                input.addEventListener("input", function () {
+                                    var value = input.value;
+
+                                    //Check if the input contains characters other than letters and numbers
+                                    if (/[^ABEZHIKMNOPTYX0-9-]/.test(value) || value == "") {
+                                        //Display The Error Message
+                                        errorMessage.style.display = "block";
+                                        nextButton.disabled = true;
+                                    }
+                                    else {
+                                        //Hide the error Message
+                                        errorMessage.style.display = "none";
+                                        nextButton.disabled = false;
+                                    }
+                                });
+                            </script>
+                        </span>
+                    </span>
+                </span>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div>
+            <p>Η ιστοσελίδα δημιουργήθηκε και είναι υπό τη διαχείριση του <a
+                    href="https://www.linkedin.com/in/gkeralnto-balla" target="_blank">Γκεράλντο Μπάλλα (LinkedIn)</a>,
+                που
+                διατηρεί όλα τα δικαιώματά της. </p>
+            <p>Για τη συλλογή των δεδομένων έχει παρθεί πρώτα η συγκατάθεση των ιδιοκτητών. Τα δεδομένα χρησιμοποιούνται
+                καθαρά για ερευνητικούς και εκπαιδευτικούς σκοπούς.</p>
+            <p>Οι πινακίδες κυκλοφορίας που συλλέγονται επεξεργάζονται με τυχαίο τρόπο ώστε να προστατευθεί η
+                ιδιωτικότητα των ιδιοκτητών.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

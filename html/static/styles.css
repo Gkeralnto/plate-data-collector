@@ -1,0 +1,329 @@
+a {
+    text-decoration: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(180, 204, 236, 0.082);
+    margin: 0%;
+    min-height: 100vh;
+}
+
+#title_container {
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    line-height: 1em;
+    font-size: 24px;
+    padding-top: 1.5em;
+    padding-bottom: 0.7em;
+    background-color: rgba(183, 219, 230, 30%);
+    box-sizing: border-box;
+}
+
+#title_container h {
+    font-size: 37px;
+    font-family: Garamond;
+    color: rgba(146, 55, 189, 90%);
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.btncontainer {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.btn {
+    align-items: center;
+    background-image: linear-gradient(144deg, #AF40FF, #5B42F3, 50%, #00DDEB);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 62, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: Garamond;
+    font-size: 24px;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 3px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.btn:active,
+.btn:hover {
+    outline: 0;
+}
+
+.btn span {
+    background-color: rgb(5, 6, 45);
+    padding: 25px 40px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+}
+
+.btn:hover span {
+    background: none;
+}
+
+@media (min-width: 768px) {
+    .btn {
+        font-size: 27px;
+        min-width: 196px;
+    }
+}
+
+#navigation {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.navbtn {
+    font-size: 25px;
+    align-items: center;
+    padding: 1px;
+    margin-left: 50px;
+    margin-right: 50px;
+    box-sizing: border-box;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    font-family: Garamond;
+}
+
+.navbtn span {
+    background: none;
+}
+
+
+.navbtn:hover span {
+    background-color: rgba(170, 54, 155, 0.658);
+    border-radius: 4px;
+    transition: 400ms;
+}
+
+.wrapper {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+    font-family: Garamond;
+    font-size: smaller;
+    background-color: rgba(183, 219, 230, 30%);
+}
+
+.imageloader {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 100%;
+    min-height: 40vb;
+
+}
+
+#imagedisplay {
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    ;
+    border: black dotted 1px;
+    max-height: 80%;
+    max-width: 70%;
+}
+
+.btn1 {
+    align-items: center;
+    background-image: linear-gradient(144deg, #AF40FF, #5B42F3, 50%, #00DDEB);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 62, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 100px;
+    padding: 2px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    margin: 4px;
+}
+
+.btn1:active,
+.btn1:hover {
+    outline: 0;
+}
+
+.btn1 span {
+    background-color: rgb(5, 6, 45);
+    padding: 5px 10px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+}
+
+.btn1:hover span {
+    background: none;
+}
+
+img {
+    width: 100%;
+}
+
+
+#makeSureThatThePicIsOk {
+    text-align: center;
+    font-family: Garamond;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    padding-top: 2%;
+    padding-bottom: 1%;
+    font-size: large;
+}
+
+.instructions h {
+    font-family: Garamond;
+    font-size: 22px;
+}
+
+.instructions p {
+    font-family: Garamond;
+    font-size: 14px;
+}
+
+.instructions {
+    box-sizing: border-box;
+    background-image: linear-gradient(144deg, #AF40FF, #5B42F3, 50%, #00DDEB);
+    border: none;
+    border-radius: 6px;
+    padding: 2px;
+    display: flex;
+}
+
+.instructions span {
+    background-color: white;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+}
+
+.examplePicture {
+    display: flex;
+    justify-content: space-around;
+}
+
+.introduction {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3px;
+    border: none;
+    border-radius: 6px;
+    background-image: linear-gradient(144deg, #AF40FF, #5B42F3, 50%, #00DDEB);
+    box-sizing: border-box;
+}
+
+.introduction span {
+    text-align: center;
+    background-color: white;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%
+}
+
+#uploadInput {
+    display: none;
+}
+
+.custom-upload-button {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 4px;
+    border: none;
+    border-radius: 6px;
+    background-image: linear-gradient(144deg, #AF40FF, #5B42F3, 50%, #00DDEB);
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 2px;
+    min-width: 100px;
+    line-height: 1em;
+    max-width: 100%;
+}
+
+.custom-upload-button:active,
+.custom-upload-button:hover {
+    outline: 0;
+}
+
+.custom-upload-button span {
+    background-color: rgb(5, 6, 45);
+    padding: 5px 10px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+}
+
+.custom-upload-button:hover span {
+    background: none;
+}
+
+.customSlider {
+    background: transparent;
+}
+
+.customSlider::-webkit-slider-runnable-track {
+    background-color: rgb(167, 164, 164);
+    border-radius: 4px;
+}
+
+.btn1:disabled {
+    background-image: none;
+    cursor: default;
+}
+
+.btn1:disabled span {
+    background-color: gray;
+    cursor: default;
+}

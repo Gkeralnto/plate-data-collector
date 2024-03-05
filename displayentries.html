@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataBase</title>
+</head>
+
+<body>
+    <div id="imageContaier"></div>
+    <script>
+        fetch('http://localhost:5000/get-all', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error(data.error)
+                    return;
+                }
+                else {
+                    const imageContainer = document.getElementById('ImageContainer');
+                    data.forEach(row => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = 'data:image/png;base64,' + row.image;
+                        imgElement.alt = image.label;
+                        imageContainer.append(imgElement);
+                    })
+                }
+            })
+    </script>
+</body>
+
+</html>

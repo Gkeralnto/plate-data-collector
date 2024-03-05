@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Data</title>
+    <link rel="stylesheet" href="./static/styles.css">
+    <link rel="stylesheet" href="./node_modules/cropperjs/dist/cropper.min.css">
+    <script src="./static/uploadImage.js"></script>
+</head>
+
+<body>
+    <header id="title_container">
+        <div>
+            <h>License Plate Recognition: Συλλέκτης Δεδομένων</h>
+        </div>
+        <div id="navigation">
+            <nav>
+                <span><a class="navbtn" role="button" href="MainPage.html"><span>Αρχική</span></a></span>
+                <span><a class="navbtn" role="button" href="UploadData.html"><span>Μεταφόρτωση</span></a></span>
+                <span><a class="navbtn" role="button" href="ClassifyData.html"><span>Ταξινόμηση</span></a></span>
+            </nav>
+        </div>
+    </header>
+    <main class="wrapper">
+        <div id="makeSureThatThePicIsOk">
+            <p>Πατήστε 'Φόρτωση Εικόνας' για να φορτώσετε την φωτογραφία σας. Σε αυτό το σημείο Θα σας ζητηθεί να την
+                αποκόψετε. Σιγουρευτείτε ότι η αποκοπή
+                έγινε σύμφωνα με τις οδηγίες και έπειτα πατήστε 'Μεταφόρτωση'.
+            </p>
+        </div>
+        <div class="imageloader">
+            <div>
+                <label for="uploadInput" class="custom-upload-button"><span>Φόρτωση αρχείου εικόνας</span></label>
+                <input class="btn1" type="file" accept="image/*" id="uploadInput">
+            </div>
+            <div id="imagedisplay">
+                <span style="flex-grow: 1; height:100%; width: 100%;">
+                    <img src="" id="imgPreview" style="width:100%; max-height:400px;">
+                </span>
+                <span style="flex-shrink: 0; flex-basis: auto; display:flex; flex-direction: column;">
+                    <h style="font-family: Garamont; text-align: center;">Περιστροφή</h>
+                    <input type="range" min="-45" max="45" value="0" id="rotationSlider" step="0.1"
+                        class="customSlider">
+                    <button class="btn1" id="cropBtn"><span>Περικοπή</span></button>
+                </span>
+                <span style="flex-grow: 1; height:100%; width:100%;">
+                    <img src="" style="width:100%; height:100%;" id="croppedImg">
+                </span>
+            </div>
+            <div>
+                <button class="btn1" id="sendImg" disabled><span>Μεταφόρτωση</span></button>
+            </div>
+            <script src="./static/SendCroppedImage.js"></script>
+        </div>
+        <div class="instructions">
+            <span>
+                <h>Οδηγίες:</h>
+                <p>Αφού επιλέξετε τη φωτογραφία θα σας ζητηθεί να την αποκόψετε. Για να θεωρηθεί σωστή η αποκοπή θα
+                    πρέπει
+                    στην φωτογραφία να φαίνονται
+                    μόνο οι χαρακτήρες και οι αριθμοί της πινακίδας κυκλοφορίας. Τυχόν αυτοκόλλητα και βίδες που
+                    φαίνονται
+                    δε δημιουργούν πρόβλημα. Οι χαρακτήρες και οι αριθμοί θα πρέπει να είναι όσο το δυνατόν πιο
+                    ευδιάκριτοι.
+                </p>
+                <div class="examplePicture">
+                    <div>
+                        <P style="color:red;">Μη αποδεκτό</P>
+                        <img src="../img/uncroppedExample.png" alt="UnCroppedExample"
+                            style="height:150px; width:400px; max-width: 100%;">
+                    </div>
+                    <div>
+                        <p style="color:green;">Αποδεκτό</p>
+                        <img src="../img/CroppedExample.png" alt="CroppedExample"
+                            style="height:100px; width:400px; max-width: 100%;">
+                    </div>
+                </div>
+            </span>
+        </div>
+    </main>
+    <footer>
+        <div>
+            <p>Η ιστοσελίδα δημιουργήθηκε και είναι υπό τη διαχείριση του <a
+                    href="https://www.linkedin.com/in/gkeralnto-balla" target="_blank">Γκεράλντο Μπάλλα (LinkedIn)</a>,
+                που
+                διατηρεί όλα τα δικαιώματά της. </p>
+            <p>Για τη συλλογή των δεδομένων έχει παρθεί πρώτα η συγκατάθεση των ιδιοκτητών. Τα δεδομένα χρησιμοποιούνται
+                καθαρά για ερευνητικούς και εκπαιδευτικούς σκοπούς.</p>
+            <p>Οι πινακίδες κυκλοφορίας που συλλέγονται επεξεργάζονται με τυχαίο τρόπο ώστε να προστατευθεί η
+                ιδιωτικότητα των ιδιοκτητών.</p>
+        </div>
+    </footer>
+    <script src="./node_modules/cropperjs/dist/cropper.min.js"></script>
+    <!-- <script src="cropImage.js"></script> -->
+</body>
+
+</html>
