@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, jsonify, render_template, send_file
 # import cv2
 # import numpy as np
 # import base64
@@ -13,15 +13,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return send_from_directory('html', 'index.html')
+    return send_file('html/MainPage.html')
 
-@app.route("/<path:filename>")
-def serve_html(filename):
-    return send_from_directory('html', filename)
-    
-@app.route('/static/<path:path>')
-def serve_static(path):
-    return send_from_directory('static', path)
 
 # @app.route('/process-image', methods=['POST'])
 # def processImage():
