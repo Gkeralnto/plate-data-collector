@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Hello, World!"
+    return send_file("html/MainPage.html")
 
 # @app.route('/process-image', methods=['POST'])
 # def processImage():
