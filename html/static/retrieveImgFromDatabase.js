@@ -1,7 +1,7 @@
 let currentId = null;
 
 function getRandomImage() {
-    fetch('http://192.168.1.63:5000/random-pic', {
+    fetch(https://pinakides.azurewebsites.net/random-pic', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ function submitUserInput(id) {
     var currentImage = document.getElementById(id);
     if (currentImage.id !== null) {
         //Send the user's input and ID to the server
-        fetch('http://192.168.1.63:5000/process-user-input', {
+        fetch('https://pinakides.azurewebsites.net/process-user-input', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
