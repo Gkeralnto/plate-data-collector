@@ -23,7 +23,7 @@ function getBase64Image(imgElement) {
 };
 
 function sendDataToBackend(imgData) {
-    fetch('http://192.168.1.63:5000/process-image', {
+    fetch('https://pinakides.azurewebsites.net', {
         method: 'POST',
         body: JSON.stringify({ image: imgData }),
         headers: {
