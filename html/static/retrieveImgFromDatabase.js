@@ -1,7 +1,7 @@
 let currentId = null;
 
 function getRandomImage() {
-    fetch(https://pinakides.azurewebsites.net/random-pic', {
+    fetch('https://pinakides.azurewebsites.net/random-pic', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
