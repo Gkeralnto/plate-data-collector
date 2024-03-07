@@ -6,8 +6,23 @@ from flask_cors import CORS
 import pyodbc as odbc
 
 def extractCharactersFromPlate(img):
-    # Your implementation for character extraction
-    pass
+    imgCopy = img.copy()
+    extractedCharacters = []
+
+    grayImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #Convert to grayscale
+
+    thresh = cv2.threshold(grayImg, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)[1] #Extract the inverted binary image using the Oshu thresholding algorithm
+
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 5)) #Create 3x5 structuring element for the Morphology algorithm
+    eroded = cv2.erode(thresh, kernel, iterations=1)
+    dilation = cv2.dilate(eroded, kernel, iterations = 3) #Extract the dilated image
+    contours= cv2.findContours(dilation, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
+    for contour in contours:
+        x, y, w, h = cv2.boundingRect(contour)
+        char = imgCopy[y:y+h, x:x+w]
+        extractedCharacters.append(char)
+
+    return extractedCharacters
 
 def connect_to_database():
     try:
@@ -76,14 +91,14 @@ def random_image():
         conn = connect_to_database()
         cursor = conn.cursor()
 
-        # cursor.execute("SELECT TOP 1 id, image FROM characters WHERE LABEL = ? ORDER BY NEWID();", ('-1',))
-        # row = cursor.fetchone()
+        cursor.execute("SELECT TOP 1 id, image FROM characters WHERE LABEL = ? ORDER BY NEWID();", ('-1',))
+        row = cursor.fetchone()
         conn.close()
 
-        if True: #if row
-            # image_id, image_data = row
-            # image_base64 = base64.b64encode(image_data).decode('utf-8')
-            return jsonify({'id': 0, 'image_blob': 0})
+        if row:
+            image_id, image_data = row
+            image_base64 = base64.b64encode(image_data).decode('utf-8')
+            return jsonify({'id': image_id, 'image_blob': image_base64})
         else:
             response = jsonify({'error': 'Error getting Image'})
             response.status_code = 404
@@ -107,8 +122,8 @@ def update_label():
         image_id = data.get('id')
         new_label = data.get('label')
 
-        #cursor.execute("UPDATE characters SET label = ? WHERE id = ?", (new_label, image_id))
-        #conn.commit()
+        cursor.execute("UPDATE characters SET label = ? WHERE id = ?", (new_label, image_id))
+        conn.commit()
         return jsonify({'message': 'Label updated successfully'})
     except Exception as e:
         response = jsonify({'error': str(e)})
