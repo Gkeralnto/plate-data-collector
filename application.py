@@ -40,8 +40,8 @@ def returnFiles(path):
 
 @app.route('/process-image', methods=['POST'])
 def processImage():
+    print("Process Image succesful")
     try:
-        print("Process Image succesful")
         conn = connect_to_database()
         cursor = conn.cursor()
 
@@ -59,7 +59,7 @@ def processImage():
         for img, i in enumerate(images):
             buffer = cv2.imencode('.png', img)[1]
             image_binary = buffer.tobytes()
-            cursor.execute('INSERT INTO characters (image, label) VALUES (?, ?)', (image_binary, "-1"))
+            cursor.execute('INSERT INTO characters (image, label) VALUES (?, ?)', (image_binary, '-1'))
 
         conn.commit()
         return jsonify({'message':'Image received, decoded and processed'})
@@ -76,7 +76,7 @@ def random_image():
         conn = connect_to_database()
         cursor = conn.cursor()
 
-        cursor.execute("SELECT TOP 1 id, image FROM characters WHERE LABEL = ? ORDER BY NEWID();", ("-1",))
+        cursor.execute("SELECT TOP 1 id, image FROM characters WHERE LABEL = ? ORDER BY NEWID();", ('-1',))
         row = cursor.fetchone()
         conn.close()
 
@@ -95,8 +95,8 @@ def random_image():
 
 @app.route('/process-user-input', methods=['POST'])
 def update_label():
+print("Process User Input succesful")
     try:
-        print("Process User Input succesful")
         conn = connect_to_database()
         cursor = conn.cursor()
 
