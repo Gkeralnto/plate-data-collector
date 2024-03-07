@@ -12,13 +12,8 @@ connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:plates-se
 app = Flask(__name__)
 CORS(app, origins='https://pinakides.azurewebsites.net/', supports_credentials=True, allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Headers"])
 
-conn = odbc.connect(connection_string)
-cursor = conn.cursor()
 
-#Create a table
-cursor.execute("EXEC CreateCharactersTableIfNotExists;")
-conn.commit()
-conn.close()
+
 
 @app.route("/")
 def index():
@@ -70,7 +65,7 @@ def processImage():
 
         return jsonify({'message':'Image received, decoded and processed'})
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Error in process_image'}), 500
     finally:
         conn.close()
 
@@ -113,7 +108,7 @@ def update_label():
         cursor.execute("UPDATE characters SET label = ? WHERE id = ?", (new_label, image_id))
         conn.commit()
     except Exception as e:
-        return jsonify({'error':str(e)}), 500
+        return jsonify({'error':'Error in update_label'}), 500
     finally:
         conn.close()
 
