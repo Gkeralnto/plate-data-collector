@@ -12,6 +12,14 @@ connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:plates-se
 app = Flask(__name__)
 CORS(app, origins='https://pinakides.azurewebsites.net/', supports_credentials=True, allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Headers"])
 
+conn = odbc.connect(connection_string)
+cursor = conn.cursor()
+
+#Create a table
+cursor.execute("EXEC CreateCharactersTableIfNotExists;")
+conn.commit()
+conn.close()
+
 @app.route("/")
 def index():
     return send_file('html/MainPage.html')
@@ -29,7 +37,7 @@ def processImage():
         cursor = conn.cursor()
 
         #Create a table
-        cursor.execute("CREATE TABLE IF NOT EXISTS characters (id INTEGER PRIMARY KEY, image BLOB, label TEXT)")
+        cursor.execute("EXEC CreateCharactersTableIfNotExists;")
         
         #Process Website Request to send Image
         if 'image' not in request.json:
