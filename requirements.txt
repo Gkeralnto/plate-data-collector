@@ -4,4 +4,4 @@ mysql-connector-python==8.0.28
 numpy==1.21.5
 opencv-python-headless==4.5.3.56
 Jinja2>=2.10
-
+pyodbc==4.0.34
