@@ -113,7 +113,7 @@ def random_image():
        image_base64 = base64.b64encode(image_data).decode('utf-8')
        return jsonify({'id': image_id, 'image_blob': image_base64})
     else:
-        return jsonify({'error': 'Error getting Image'}), 500
+        return jsonify({'error': 'Error getting Image'}),400
 
 @app.route('/process-user-input', methods=['POST'])
 def update_label():
