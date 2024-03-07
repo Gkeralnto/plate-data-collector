@@ -8,8 +8,7 @@ document.getElementById('sendImg').addEventListener('click', function () {
 function getBase64Image(imgElement) {
     if (imgElement.src.startsWith('data:image')) {
         return imgElement.src.split(',')[1];
-    }
-    else {
+    } else {
         var canvas = document.createElement('canvas');
         canvas.width = imgElement.width;
         canvas.height = imgElement.height;
@@ -19,8 +18,8 @@ function getBase64Image(imgElement) {
 
         var dataURL = canvas.toDataURL('image/png');
         return dataURL.replace(/^data:image\/(jpg|png);base64,/, '');
-    };
-};
+    }
+}
 
 function sendDataToBackend(imgData) {
     fetch('https://pinakides.azurewebsites.net/process-image', {
@@ -32,12 +31,14 @@ function sendDataToBackend(imgData) {
     })
         .then(response => {
             if (response.ok) {
-                console.log('Image sent succesfully');
+                console.log('Image sent successfully');
             } else {
-                console.error('Error sending image');
+                // Handle HTTP errors
+                console.error('Error sending image:', response.status);
             }
         })
         .catch(error => {
+            // Handle network errors
             console.error('Error sending image:', error);
         });
-};
+}
