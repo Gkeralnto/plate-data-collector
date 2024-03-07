@@ -37,7 +37,7 @@ CORS(app, origins='https://pinakides.azurewebsites.net/', supports_credentials=T
 @app.route("/")
 def index():
     try:
-        conn = connect_to_database()
+        conn = connect_to_database(connection_string)
         cursor = conn.cursor()
 
         cursor.execute("EXEC CreateCharactersTableIfNotExists;")
@@ -57,10 +57,8 @@ def returnFiles(path):
 def processImage():
     print("Process Image succesful")
     try:
-        conn = connect_to_database()
+        conn = connect_to_database(connection_string)
         cursor = conn.cursor()
-
-        cursor.execute("EXEC CreateCharactersTableIfNotExists;")
 
         if 'image' not in request.json:
             return jsonify({'error' : 'Image data not found in request'}), 400
@@ -88,7 +86,7 @@ def processImage():
 @app.route('/random-pic', methods=['GET'])
 def random_image():
     try:
-        conn = connect_to_database()
+        conn = connect_to_database(connection_string)
         cursor = conn.cursor()
 
         cursor.execute("SELECT TOP 1 id, image FROM characters WHERE LABEL = ? ORDER BY NEWID();", ('-1',))
@@ -112,7 +110,7 @@ def random_image():
 def update_label():
     print("Process User Input succesful")
     try:
-        conn = connect_to_database()
+        conn = connect_to_database(connection_string)
         cursor = conn.cursor()
 
         if 'id' not in request.json or 'label' not in request.json:
