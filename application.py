@@ -95,7 +95,7 @@ def random_image():
 
 @app.route('/process-user-input', methods=['POST'])
 def update_label():
-print("Process User Input succesful")
+    print("Process User Input succesful")
     try:
         conn = connect_to_database()
         cursor = conn.cursor()
