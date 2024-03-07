@@ -37,7 +37,7 @@ CORS(app, origins='https://pinakides.azurewebsites.net/', supports_credentials=T
 @app.route("/")
 def index():
     try:
-        conn = connect_to_database(connection_string)
+        conn = connect_to_database()
         cursor = conn.cursor()
 
         cursor.execute("EXEC CreateCharactersTableIfNotExists;")
@@ -57,7 +57,7 @@ def returnFiles(path):
 def processImage():
     print("Process Image succesful")
     try:
-        conn = connect_to_database(connection_string)
+        conn = connect_to_database()
         cursor = conn.cursor()
 
         if 'image' not in request.json:
@@ -72,9 +72,9 @@ def processImage():
         for img, i in enumerate(images):
             buffer = cv2.imencode('.png', img)[1]
             image_binary = buffer.tobytes()
-            cursor.execute('INSERT INTO characters (image, label) VALUES (?, ?)', (image_binary, '-1'))
+            # cursor.execute('INSERT INTO characters (image, label) VALUES (?, ?)', (image_binary, '-1'))
 
-        conn.commit()
+        # conn.commit()
         return jsonify({'message':'Image received, decoded and processed'})
     except Exception as e:
         response = jsonify({'error': str(e)})
@@ -86,7 +86,7 @@ def processImage():
 @app.route('/random-pic', methods=['GET'])
 def random_image():
     try:
-        conn = connect_to_database(connection_string)
+        conn = connect_to_database()
         cursor = conn.cursor()
 
         cursor.execute("SELECT TOP 1 id, image FROM characters WHERE LABEL = ? ORDER BY NEWID();", ('-1',))
@@ -110,7 +110,7 @@ def random_image():
 def update_label():
     print("Process User Input succesful")
     try:
-        conn = connect_to_database(connection_string)
+        conn = connect_to_database()
         cursor = conn.cursor()
 
         if 'id' not in request.json or 'label' not in request.json:
