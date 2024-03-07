@@ -41,6 +41,7 @@ def returnFiles(path):
 @app.route('/process-image', methods=['POST'])
 def processImage():
     try:
+        print("Process Image succesful")
         conn = connect_to_database()
         cursor = conn.cursor()
 
@@ -75,7 +76,7 @@ def random_image():
         conn = connect_to_database()
         cursor = conn.cursor()
 
-        cursor.execute("SELECT id, image FROM characters WHERE LABEL = ? ORDER BY RANDOM() LIMIT 1", ("-1",))
+        cursor.execute("SELECT TOP 1 id, image FROM characters WHERE LABEL = ? ORDER BY NEWID();", ("-1",))
         row = cursor.fetchone()
         conn.close()
 
@@ -95,6 +96,7 @@ def random_image():
 @app.route('/process-user-input', methods=['POST'])
 def update_label():
     try:
+        print("Process User Input succesful")
         conn = connect_to_database()
         cursor = conn.cursor()
 
