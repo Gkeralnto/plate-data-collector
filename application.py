@@ -7,7 +7,7 @@ import CharacterSegmentation as cs
 import random
 import pyodbc as odbc
 
-connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:plates-server.database.windows.net,1433;Database=plates-characters;Uid=plateslogin;Pwd=Geribosoballa123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:plates-server.database.windows.net,1433;Database=plates-characters;Uid=plateslogin;Pwd=Geribosiballa123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
 
 app = Flask(__name__)
 CORS(app, origins='https://pinakides.azurewebsites.net/', supports_credentials=True, allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Headers"])
@@ -17,7 +17,15 @@ CORS(app, origins='https://pinakides.azurewebsites.net/', supports_credentials=T
 
 @app.route("/")
 def index():
+    conn = odbc.connect(connection_string)
+    cursor = conn.cursor()
+
+    #Create a table
+    cursor.execute("EXEC CreateCharactersTableIfNotExists;")
+    conn.commit()
+    conn.close()
     return send_file('html/MainPage.html')
+    
 
 @app.route("/<path:path>")
 def returnFiles(path):
