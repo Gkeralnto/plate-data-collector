@@ -3,9 +3,29 @@ import cv2
 import numpy as np
 import base64
 from flask_cors import CORS
-import CharacterSegmentation as cs
+#import CharacterSegmentation as cs
 import random
 import pyodbc as odbc
+
+def extractCharactersFromPlate(img):
+
+    imgCopy = img.copy()
+    extractedCharacters = []
+
+    grayImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #Convert to grayscale
+
+    thresh = cv2.threshold(grayImg, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)[1] #Extract the inverted binary image using the Oshu thresholding algorithm
+
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 5)) #Create 3x5 structuring element for the Morphology algorithm
+    eroded = cv2.erode(thresh, kernel, iterations=1)
+    dilation = cv2.dilate(eroded, kernel, iterations = 3) #Extract the dilated image
+    contours= cv2.findContours(dilation, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
+    for contour in contours:
+        x, y, w, h = cv2.boundingRect(contour)
+        char = imgCopy[y:y+h, x:x+w]
+        extractedCharacters.append(char)
+
+    return extractedCharacters
 
 connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:plates-server.database.windows.net,1433;Database=plates-characters;Uid=plateslogin;Pwd=Geribosiballa123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
 
@@ -61,7 +81,7 @@ def processImage():
         
 
         #Extract characters from image
-        images = cs.extractCharactersFromPlate(image)
+        images = extractCharactersFromPlate(image)
         for img, i in zip(images, range(0, len(images))):
             #Insert images into the table
             buffer = cv2.imencode('.png', img)[1]
