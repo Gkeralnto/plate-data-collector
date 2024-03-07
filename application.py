@@ -4,19 +4,13 @@ import numpy as np
 import base64
 from flask_cors import CORS
 import CharacterSegmentation as cs
-import mysql.connector
 import random
+import pyodbc as odbc
 
+connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:plates-server.database.windows.net,1433;Database=plates-characters;Uid=plateslogin;Pwd=Geribosiballa123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
 
 app = Flask(__name__)
 CORS(app, resources={r"/*":{"origins":"*"}}, supports_credentials=True, allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Headers"])
-
-config = {
-    'user' : 'plateslogin',
-    'password': 'Geribosiballa123',
-    'host': 'plates-server.database.windows.net',
-    'database': 'plates-characters'
-}
 
 @app.route("/")
 def index():
@@ -31,7 +25,7 @@ def returnFiles(path):
 def processImage():
     try:
         #Connect to SQLite Database
-        conn = mysql.connector.connect(**config)
+        conn = odbc.connect(connection_string)
         cursor = conn.cursor()
 
         #Create a table
@@ -75,7 +69,7 @@ def processImage():
 @app.route('/random-pic', methods=['GET'])
 def random_image():
     #Connect to SQLite database
-    conn = mysql.connector.connect(**config)
+    conn = odbc.connect(connection_string)
     cursor = conn.cursor()
 
     #Select random image from data
@@ -88,13 +82,13 @@ def random_image():
        image_base64 = base64.b64encode(image_data).decode('utf-8')
        return jsonify({'id': image_id, 'image_blob': image_base64})
     else:
-        return jsonify({'error':'No images found'}), 404
+        return jsonify({'id': '', 'image_blob': ''})
 
 @app.route('/process-user-input', methods=['POST'])
 def update_label():
     try:
         #Connect to SQLite database
-        conn = mysql.connector.connect(**config)
+        conn = odbc.connect(connection_string)
         cursor = conn.cursor()
 
         if 'id' not in request.json:
