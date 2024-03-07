@@ -7,7 +7,7 @@ import CharacterSegmentation as cs
 import random
 import pyodbc as odbc
 
-connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:plates-server.database.windows.net,1433;Database=plates-characters;Uid=plateslogin;Pwd=Geribosiballa123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+connection_string = "Driver={ODBC Driver 18 for SQL Server};Server=tcp:plates-server.database.windows.net;Database=plates-characters;Uid=plateslogin;Pwd=Geribosiballa123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
 
 app = Flask(__name__)
 CORS(app, resources={r"/*":{"origins":"*"}}, supports_credentials=True, allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Headers"])
