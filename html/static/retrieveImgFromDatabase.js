@@ -1,4 +1,4 @@
-let currentId = '';
+let currentId = 'starting';
 
 function getRandomImage() {
     fetch('https://pinakides.azurewebsites.net/random-pic', {
@@ -10,9 +10,9 @@ function getRandomImage() {
         .then(response => response.json())
         .then(data => {
             if (data.error) {
-                curElement = document.getElementById("currenId");
+                curElement = document.getElementById(currentId);
                 curElement.src = '';
-                currentId = '';
+                currentId = 'starting';
                 curElement.id = currentId;
                 console.error(data.error)
                 return;
@@ -29,7 +29,7 @@ function getRandomImage() {
 function submitUserInput(id) {
     const userInput = document.getElementById('userinputinner').value;
     var currentImage = document.getElementById(id);
-    if (currentImage.id !== '') {
+    if (currentImage.id !== 'starting') {
         //Send the user's input and ID to the server
         fetch('https://pinakides.azurewebsites.net/process-user-input', {
             method: 'POST',
