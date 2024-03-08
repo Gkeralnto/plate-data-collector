@@ -69,15 +69,13 @@ def processImage():
         image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
         images = extractCharactersFromPlate(image)
-        k=0
-        for img, i in enumerate(images):
-            k+=1
+        for img in images:
             buffer = cv2.imencode('.png', img)[1]
             image_binary = buffer.tobytes()
             cursor.execute('INSERT INTO characters (image, label) VALUES (?, ?)', (image_binary, '-1'))
 
         conn.commit()
-        return jsonify({'message':'Image received, decoded and processed' + str(k)})
+        return jsonify({'message':'Image received, decoded and processed'})
     except Exception as e:
         response = jsonify({'error': str(e)})
         response.status_code = 500
