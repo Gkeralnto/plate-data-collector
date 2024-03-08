@@ -1,4 +1,4 @@
-let currentId = null;
+let currentId = '';
 
 function getRandomImage() {
     fetch('https://pinakides.azurewebsites.net/random-pic', {
@@ -11,13 +11,13 @@ function getRandomImage() {
         .then(data => {
             if (data.error) {
                 curElement = document.getElementById("currenId");
-                curElement.src = "";
-                currentId = "";
+                curElement.src = '';
+                currentId = '';
                 curElement.id = currentId;
                 console.error(data.error)
                 return;
             } else {
-                curElement = document.getElementById("rndm");
+                curElement = document.getElementById(currentId);
                 curElement.src = 'data:image/png;base64,' + data.image_blob;
                 currentId = data.id;
                 curElement.id = currentId;
@@ -29,7 +29,7 @@ function getRandomImage() {
 function submitUserInput(id) {
     const userInput = document.getElementById('userinputinner').value;
     var currentImage = document.getElementById(id);
-    if (currentImage.id !== null) {
+    if (currentImage.id !== '') {
         //Send the user's input and ID to the server
         fetch('https://pinakides.azurewebsites.net/process-user-input', {
             method: 'POST',
