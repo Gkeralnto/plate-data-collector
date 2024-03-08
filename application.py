@@ -74,10 +74,10 @@ def processImage():
             k+=1
             buffer = cv2.imencode('.png', img)[1]
             image_binary = buffer.tobytes()
-            # cursor.execute('INSERT INTO characters (image, label) VALUES (?, ?)', (image_binary, '-1'))
+            cursor.execute('INSERT INTO characters (image, label) VALUES (?, ?)', (image_binary, '-1'))
 
         conn.commit()
-        return jsonify({'message':'Image received, decoded and processed' + string(k)})
+        return jsonify({'message':'Image received, decoded and processed' + str(k)})
     except Exception as e:
         response = jsonify({'error': str(e)})
         response.status_code = 500
